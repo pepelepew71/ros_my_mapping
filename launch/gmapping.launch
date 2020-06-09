@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+
+    <arg name="scan_topic" default="scan" />
+    <arg name="transform_publish_period" default="0.05" />
+
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping">
+        <rosparam file="$(find ros_my_mapping)/config/gmapping.yaml" command="load" />
+        <param name="transform_publish_period" value="$(arg transform_publish_period)" />
+        <remap from="scan" to="$(arg scan_topic)" />
+    </node>
+
+</launch>
